@@ -116,7 +116,8 @@ public class Rotor {
     }
 
     public static int encrypt(int input, int offset, int setting, int[] mapping) {
-        return 0;
+        int amountToShift = offset - setting;
+        return (mapping[(input + amountToShift + 26) % 26] - amountToShift + 26) % 26;
     }
 
     public int goForward(int input) {
