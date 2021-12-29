@@ -26,8 +26,8 @@ public class EnigmaM4 extends EnigmaM3{
 
         int sixthChange = fourthRotor.goBackward(fifthChange);
         int seventhChange = thirdRotor.goBackward(sixthChange);
-        int eigthChange = secondRotor.goBackward(seventhChange);
-        int ninthChange = firstRotor.goBackward(eigthChange);
+        int eighthChange = secondRotor.goBackward(seventhChange);
+        int ninthChange = firstRotor.goBackward(eighthChange);
 
         int finalResult = plugBoard.goForward(ninthChange);
 
