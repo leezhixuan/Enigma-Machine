@@ -21,6 +21,21 @@ public class EnigmaM3 extends Enigma {
         this.plugBoard = new PlugBoard(plugBoardConnections);
     }
 
+    @Override
+    public void rotate() {
+        if (this.secondRotor.isAtTurnoverNotchPosition()) {
+            // double stepping
+            this.secondRotor.executeTurnover();
+            this.thirdRotor.executeTurnover();
+
+        } else if (firstRotor.isAtTurnoverNotchPosition()) {
+            this.secondRotor.executeTurnover();
+        }
+
+        // will always turn
+        firstRotor.executeTurnover();
+    }
+
     public int encrypt(int input) {
         rotate();
 
