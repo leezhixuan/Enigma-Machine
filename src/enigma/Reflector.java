@@ -11,10 +11,16 @@ public class Reflector {
 
     protected static Reflector createReflector(String name) {
         switch (name) {
+            case "A":
+                return new Reflector("A", "EJMZALYXVBWFCRQUONTSPIKHGD");
             case "B":
                 return new Reflector("B", "YRUHQSLDPXNGOKMIEBFZCWVJAT");
             case "C":
                 return new Reflector("C", "FVPJIAOYEDRZXWGCTKUQSBNMHL");
+            case "B Thin":
+                return new Reflector("B Thin", "ENKQAUYWJICOPBLMDXZVFTHRGS");
+            case "C Thin":
+                return new Reflector("C Thin", "RDOBJNTKVEHMLFCWZAXGYIPSUQ");
         }
         return null;
     }

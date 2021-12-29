@@ -56,6 +56,30 @@ public class Rotor {
                         return this.turnoverNotchPosition == 12 || this.turnoverNotchPosition == 25;
                     }
                 };
+            case "Beta":
+                return new Rotor("Beta", "LEYJVCNIXWPBQMDRTAKZGFUHOS", rotorOffset, 0, ringSetting) {
+                    @Override
+                    public boolean isAtTurnoverNotchPosition() {
+                        return false;
+                    }
+
+                    @Override
+                    public void executeTurnover() {
+                        this.rotorOffset = this.rotorOffset;
+                    }
+                };
+            case "Gamma":
+                return new Rotor("Beta", "FSOKANUERHMBTIYCWLQPZXVGJD", rotorOffset, 0, ringSetting) {
+                    @Override
+                    public boolean isAtTurnoverNotchPosition() {
+                        return false;
+                    }
+
+                    @Override
+                    public void executeTurnover() {
+                        this.rotorOffset = this.rotorOffset;
+                    }
+                };
             default:
                 return new Rotor("IdentityRotor","ABCDEFGHIJKLMNOPQRSTUVWXYZ", rotorOffset, 0, ringSetting);
         }
