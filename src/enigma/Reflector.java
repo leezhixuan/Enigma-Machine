@@ -1,7 +1,5 @@
 package enigma;
 
-import javax.management.relation.Relation;
-
 public class Reflector {
     protected String name;
     protected int[] forwardWires;
