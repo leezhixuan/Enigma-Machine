@@ -2,27 +2,7 @@ package enigma;
 
 abstract class Enigma {
 
-    public Rotor firstRotor; // counted from the right
-    public Rotor secondRotor;
-    public Rotor thirdRotor;
-
-    public Reflector reflector;
-
-    public PlugBoard plugBoard;
-
-    public void rotate() {
-        if (this.secondRotor.isAtTurnoverNotchPosition()) {
-            // double stepping
-            this.secondRotor.executeTurnover();
-            this.thirdRotor.executeTurnover();
-
-        } else if (firstRotor.isAtTurnoverNotchPosition()) {
-            this.secondRotor.executeTurnover();
-        }
-
-        // will always turn
-        firstRotor.executeTurnover();
-    }
+    abstract void rotate();
 
     abstract int encrypt(int input);
 
@@ -30,14 +10,16 @@ abstract class Enigma {
         return (char) (this.encrypt(input - 65) + 65);
     }
 
-    public char[] encrypt(char[] input) {
-        char[] output = new char[input.length];
+    public String encrypt(String input) {
+        input = input.toUpperCase(); // converts everything to uppercase so that the program will not break
+        char[] inputArray = input.toCharArray();
+        char[] output = new char[inputArray.length];
 
-        for (int i = 0; i < input.length; i++) {
-            output[i] = this.encrypt(input[i]);
+        for (int i = 0; i < inputArray.length; i++) {
+            output[i] = this.encrypt(inputArray[i]);
         }
 
-        return output;
+        return new String(output);
     }
 
 }
