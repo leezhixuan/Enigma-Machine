@@ -82,4 +82,28 @@ public class Rotor {
         }
         return inverseWires;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getRotorOffset() {
+        return this.rotorOffset;
+    }
+
+    public static int encrypt(int input, int offset, int setting, int[] mapping) {
+        return 0;
+    }
+
+    public int goForward(int input) {
+        return encrypt(input, this.rotorOffset, this.ringSetting, this.forwardWires);
+    }
+
+    public int goBackward(int input) {
+        return encrypt(input, this.rotorOffset, this.ringSetting, this.backwardWires);
+    }
+
+    public void executeTurnover() {
+        this.rotorOffset = (this.rotorOffset + 1) % 26;
+    }
 }
