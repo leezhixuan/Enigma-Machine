@@ -1,12 +1,27 @@
 package enigma;
 
-public class EnigmaM4 extends EnigmaM3{
+public class EnigmaM4 extends Enigma {
 
+    public Rotor firstRotor; // counted from the right
+    public Rotor secondRotor;
+    public Rotor thirdRotor;
     public Rotor fourthRotor;
 
-    public EnigmaM4(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugboardConnections) {
-        super(rotorNames, reflector, rotorOffsets, ringSettings, plugboardConnections);
+
+    public Reflector reflector;
+
+    public PlugBoard plugBoard;
+
+    public EnigmaM4(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugBoardConnections) {
+        assert rotorNames.length == 4;
+        assert rotorOffsets.length == 4;
+        assert ringSettings.length == 4;
+        this.firstRotor = Rotor.createRotor(rotorNames[0], rotorOffsets[0], ringSettings[0]);
+        this.secondRotor = Rotor.createRotor(rotorNames[1], rotorOffsets[1], ringSettings[1]);
+        this.thirdRotor = Rotor.createRotor(rotorNames[2], rotorOffsets[2], ringSettings[2]);
         this.fourthRotor = Rotor.createRotor(rotorNames[3], rotorOffsets[3], ringSettings[3]);
+        this.reflector = Reflector.createReflector(reflector);
+        this.plugBoard = new PlugBoard(plugBoardConnections);
     }
 
     @Override
@@ -33,4 +48,5 @@ public class EnigmaM4 extends EnigmaM3{
 
         return finalResult;
     }
+
 }
