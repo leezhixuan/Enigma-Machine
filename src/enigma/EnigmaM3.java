@@ -1,6 +1,6 @@
 package enigma;
 
-public class EnigmaM3 {
+public class EnigmaM3 extends Enigma {
 
     public Rotor firstRotor; // counted from the right
     public Rotor secondRotor;
@@ -10,26 +10,15 @@ public class EnigmaM3 {
 
     public PlugBoard plugBoard;
 
-    public EnigmaM3(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugboardConnections) {
+    public EnigmaM3(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugBoardConnections) {
+        assert rotorNames.length == 3;
+        assert rotorOffsets.length == 3;
+        assert ringSettings.length == 3;
         this.firstRotor = Rotor.createRotor(rotorNames[0], rotorOffsets[0], ringSettings[0]);
         this.secondRotor = Rotor.createRotor(rotorNames[1], rotorOffsets[1], ringSettings[1]);
         this.thirdRotor = Rotor.createRotor(rotorNames[2], rotorOffsets[2], ringSettings[2]);
         this.reflector = Reflector.createReflector(reflector);
-        this.plugBoard = new PlugBoard(plugboardConnections);
-    }
-
-    public void rotate() {
-        if (this.secondRotor.isAtTurnoverNotchPosition()) {
-            // double stepping
-            this.secondRotor.executeTurnover();
-            this.thirdRotor.executeTurnover();
-
-        } else if (firstRotor.isAtTurnoverNotchPosition()) {
-            this.secondRotor.executeTurnover();
-        }
-
-        // will always turn
-        firstRotor.executeTurnover();
+        this.plugBoard = new PlugBoard(plugBoardConnections);
     }
 
     public int encrypt(int input) {
@@ -52,19 +41,5 @@ public class EnigmaM3 {
         int finalResult = plugBoard.goForward(seventhChange);
 
         return finalResult;
-    }
-
-    public char encrypt(char input) {
-        return (char) (this.encrypt(input - 65) + 65);
-    }
-
-    public char[] encrypt(char[] input) {
-        char[] output = new char[input.length];
-
-        for (int i = 0; i < input.length; i++) {
-            output[i] = this.encrypt(input[i]);
-        }
-
-        return output;
     }
 }
