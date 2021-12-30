@@ -69,7 +69,7 @@ public class Rotor {
                     }
                 };
             case "Gamma":
-                return new Rotor("Beta", "FSOKANUERHMBTIYCWLQPZXVGJD", rotorOffset, 0, ringSetting) {
+                return new Rotor("Gamma", "FSOKANUERHMBTIYCWLQPZXVGJD", rotorOffset, 0, ringSetting) {
                     @Override
                     public boolean isAtTurnoverNotchPosition() {
                         return false;
