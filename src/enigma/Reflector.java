@@ -1,5 +1,7 @@
 package enigma;
 
+import java.util.Arrays;
+
 public class Reflector {
     protected String name;
     protected int[] forwardWires;
@@ -29,7 +31,7 @@ public class Reflector {
         char[] charArray = mapping.toCharArray();
         int[] wiring = new int[charArray.length];
         for (int i = 0; i < charArray.length; i++) {
-            wiring[i] = charArray[i] - 65; // 65 is the ascii value of 'a'
+            wiring[i] = charArray[i] - 65; // 65 is the ascii value of 'A'
         }
         return wiring;
     }
