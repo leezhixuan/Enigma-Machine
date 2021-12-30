@@ -4,13 +4,13 @@ import enigma.Exceptions.EnigmaException;
 
 abstract class Enigma {
 
-    public Rotor firstRotor; // counted from the left
-    public Rotor secondRotor;
-    public Rotor thirdRotor;
+    protected Rotor firstRotor; // counted from the left
+    protected Rotor secondRotor;
+    protected Rotor thirdRotor;
 
-    public Reflector reflector;
+    protected Reflector reflector;
 
-    public PlugBoard plugBoard;
+    protected PlugBoard plugBoard;
 
     protected enum RotorNames {
         I {
@@ -63,7 +63,7 @@ abstract class Enigma {
         }
     }
 
-    Enigma(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugBoardConnections) {
+    protected Enigma(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugBoardConnections) {
         try {
             checkNoOfRotors(rotorNames);
             checkValidityOfRotorNames(rotorNames);
@@ -82,15 +82,15 @@ abstract class Enigma {
         this.plugBoard = new PlugBoard(plugBoardConnections);
     }
 
-    abstract int encrypt(int input);
+    protected abstract int encrypt(int input);
 
-    abstract void checkNoOfRotors(String[] rotorNames) throws EnigmaException;
-    abstract void checkValidityOfRotorNames(String[] rotorNames) throws EnigmaException;
-    abstract void checkValidityOfReflector(String reflector) throws EnigmaException;
-    abstract void checkNoOfRotorOffsets(int[] rotorOffsets) throws EnigmaException;
-    abstract void checkValidityOfRotorOffsets(int[] rotorOffsets) throws EnigmaException;
-    abstract void checkNoOfRingSettings(int[] ringSettings) throws EnigmaException;
-    abstract void checkValidityOfRingSettings(int[] ringSettings) throws EnigmaException;
+    protected abstract void checkNoOfRotors(String[] rotorNames) throws EnigmaException;
+    protected abstract void checkValidityOfRotorNames(String[] rotorNames) throws EnigmaException;
+    protected abstract void checkValidityOfReflector(String reflector) throws EnigmaException;
+    protected abstract void checkNoOfRotorOffsets(int[] rotorOffsets) throws EnigmaException;
+    protected abstract void checkValidityOfRotorOffsets(int[] rotorOffsets) throws EnigmaException;
+    protected abstract void checkNoOfRingSettings(int[] ringSettings) throws EnigmaException;
+    protected abstract void checkValidityOfRingSettings(int[] ringSettings) throws EnigmaException;
 
     public void rotate() {
         if (this.secondRotor.isAtTurnoverNotchPosition()) {
