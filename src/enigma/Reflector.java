@@ -1,7 +1,5 @@
 package enigma;
 
-import java.util.Arrays;
-
 public class Reflector {
     protected String name;
     protected int[] forwardWires;
