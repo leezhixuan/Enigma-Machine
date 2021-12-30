@@ -1,21 +1,51 @@
 package enigma;
 
+import enigma.Exceptions.EnigmaException;
+
+import java.util.stream.Stream;
+
 public class EnigmaM4 extends Enigma {
+
+    private final int NO_OF_ROTORS = 4;
+
+    private enum ReflectorNames {
+        B_Thin {
+            @Override
+            public String toString() {
+                return "B Thin";
+            }
+        },
+        C_Thin {
+            @Override
+            public String toString() {
+                return "C Thin";
+            }
+        }
+    }
 
     public Rotor firstRotor; // counted from the right
     public Rotor secondRotor;
     public Rotor thirdRotor;
     public Rotor fourthRotor;
 
-
     public Reflector reflector;
 
     public PlugBoard plugBoard;
 
     public EnigmaM4(String[] rotorNames, String reflector, int[] rotorOffsets, int[] ringSettings, String plugBoardConnections) {
-        assert rotorNames.length == 4;
-        assert rotorOffsets.length == 4;
-        assert ringSettings.length == 4;
+        try {
+            checkNoOfRotors(rotorNames);
+            checkValidityOfRotorNames(rotorNames);
+            checkNoOfRotors(rotorNames);
+            checkValidityOfRotorNames(rotorNames);
+            checkValidityOfReflector(reflector);
+            checkNoOfRotorOffsets(rotorOffsets);
+            checkValidityOfRotorOffsets(rotorOffsets);
+            checkNoOfRingSettings(ringSettings);
+            checkValidityOfRingSettings(ringSettings);
+        } catch (EnigmaException e) {
+            System.out.println(e.toString());
+        }
         this.firstRotor = Rotor.createRotor(rotorNames[0], rotorOffsets[0], ringSettings[0]);
         this.secondRotor = Rotor.createRotor(rotorNames[1], rotorOffsets[1], ringSettings[1]);
         this.thirdRotor = Rotor.createRotor(rotorNames[2], rotorOffsets[2], ringSettings[2]);
@@ -62,6 +92,61 @@ public class EnigmaM4 extends Enigma {
         int finalResult = plugBoard.goForward(ninthChange);
 
         return finalResult;
+    }
+
+    @Override
+    void checkNoOfRotors(String[] rotorNames) throws EnigmaException {
+        if (rotorNames.length != this.NO_OF_ROTORS) {
+            throw new EnigmaException("Number of rotors is not 3!");
+        }
+    }
+
+    @Override
+    void checkValidityOfRotorNames(String[] rotorNames) throws EnigmaException {
+        for (String name : rotorNames) {
+            if (!Stream.of(RotorNames.values()).anyMatch(x -> name.equals(x.toString()))) {
+                throw new EnigmaException("Invalid Rotor Name.");
+            }
+        }
+    }
+
+    @Override
+    void checkValidityOfReflector(String reflector) throws EnigmaException {
+        if (!Stream.of(EnigmaM4.ReflectorNames.values()).anyMatch(x -> reflector.equals(x.toString()))) {
+            throw new EnigmaException("Invalid Reflector Name.");
+        }
+    }
+
+    @Override
+    void checkNoOfRotorOffsets(int[] rotorOffsets) throws EnigmaException {
+        if (rotorOffsets.length != 3) {
+            throw new EnigmaException("Number of rotor offsets is not 3!");
+        }
+    }
+
+    @Override
+    void checkValidityOfRotorOffsets(int[] rotorOffsets) throws EnigmaException{
+        for (int offset : rotorOffsets) {
+            if (offset < 0 || offset > 25) {
+                throw new EnigmaException("Invalid Rotor Offset.");
+            }
+        }
+    }
+
+    @Override
+    void checkNoOfRingSettings(int[] ringSettings) throws EnigmaException {
+        if (ringSettings.length != NO_OF_ROTORS) {
+            throw new EnigmaException("Number of ring settings is not 3!");
+        }
+    }
+
+    @Override
+    void checkValidityOfRingSettings(int[] ringSettings) throws EnigmaException {
+        for (int setting : ringSettings) {
+            if (setting < 0 || setting > 25) {
+                throw new EnigmaException("Invalid Ring Setting.");
+            }
+        }
     }
 
 }
